@@ -1,0 +1,10 @@
+*.class
+*.jar
+*.log
+.cpcache/
+.shadow-cljs/
+node_modules/
+out/
+target/
+.nrepl-port
+.DS_Store

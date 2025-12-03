@@ -1,0 +1,22 @@
+{
+  "name": "riff",
+  "version": "0.1.0",
+  "description": "Hierarchical keyboard shortcut management for ClojureScript",
+  "main": "src/riff/core.cljs",
+  "scripts": {
+    "test": "shadow-cljs compile test",
+    "watch": "shadow-cljs watch test"
+  },
+  "keywords": [
+    "clojurescript",
+    "keyboard",
+    "shortcuts",
+    "hotkeys",
+    "keybindings"
+  ],
+  "author": "",
+  "license": "EPL-1.0",
+  "devDependencies": {
+    "shadow-cljs": "^3.3.2"
+  }
+}

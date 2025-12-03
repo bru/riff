@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Setup Clojure
+      uses: DeLaGuardo/setup-clojure@12.1
+      with:
+        cli: latest
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.m2
+          ~/.gitlibs
+        key: ${{ runner.os }}-cljs-release-${{ hashFiles('**/deps.edn') }}
+        restore-keys: |
+          ${{ runner.os }}-cljs-release-
+
+    - name: Build library
+      run: clojure -T:build jar
+
+    - name: Deploy to Clojars
+      env:
+        CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
+        CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
+      run: clojure -T:build deploy
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
