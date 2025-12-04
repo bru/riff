@@ -1,7 +1,9 @@
 # riff
 
 A hierarchical keyboard shortcut management library for ClojureScript applications.
-The design of this library has been inspired and heavily influenced by [keybind](https://github.com/piranha/keybind), but eventually diverged due to the specific needs of the application that it's been extracted from.
+
+> [!NOTE]
+> This library has been originally inspired and heavily influenced by [keybind](https://github.com/piranha/keybind), from which eventually diverged due to the specific needs of the application that it's been extracted from.
 
 ## Features
 
